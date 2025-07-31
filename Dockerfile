@@ -1,5 +1,18 @@
 FROM eclipse-temurin:17-jdk-alpine
-VOLUME /tmp
-COPY target/emailSystem-0.0.1-SNAPSHOT.jar emailSystem.jar
+
+# Install Maven
+RUN apk add --no-cache maven
+
+WORKDIR /app
+
+# Copy the project files
+COPY pom.xml .
+COPY src ./src
+COPY system.properties .
+
+# Build the application
+RUN mvn clean package -DskipTests
+
+# Run the application
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/emailSystem.jar"]
+ENTRYPOINT ["java","-jar","/app/target/emailSystem-0.0.1-SNAPSHOT.jar"]
