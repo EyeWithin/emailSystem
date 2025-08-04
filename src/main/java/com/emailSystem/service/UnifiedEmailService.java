@@ -121,7 +121,7 @@ public class UnifiedEmailService {
 		
 		
 		helper.setTo(recipientEmail);
-		helper.setSubject("Thank You!");
+		helper.setSubject("Thank You! - Eye Within Art");
         helper.setText(htmlContent, true);
         
         mailSender.send(message);
